@@ -1,0 +1,46 @@
+.OutputField {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 75px;
+  padding: 10px;
+}
+
+.OutputElement {
+  display: inline-block;
+  height: 75px;
+  text-align: center;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.OutputElement img {
+  height: 70%;
+}
+
+.Controls {
+  position: absolute;
+  bottom: 50%;
+  right: 300px;
+  transform: translate(0, 50%);
+  color: #474747;
+  cursor: pointer;
+  /* display: flex; */
+  width: 100px;
+  height: 40px;
+  /* align-items: center;
+  justify-content: center; */
+}
+
+.Controls .Control {
+  opacity: 0.5;
+  height: 100%;
+  font-size: 50px;
+  display: inline-block;
+}
+
+.Controls .Control:hover {
+  opacity: 1;
+}

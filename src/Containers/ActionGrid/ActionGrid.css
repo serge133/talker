@@ -1,0 +1,12 @@
+.Grid {
+  position: fixed;
+  top: 75px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 100px);
+  display: grid;
+  /* Optional Space between in the grid */
+  grid-gap: 10px;
+  padding: 10px;
+  overflow: auto;
+}

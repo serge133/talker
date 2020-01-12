@@ -1,0 +1,1 @@
+export const CHANGE_GRID_SIZE = "CHANGE_GRID_SIZE";

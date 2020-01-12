@@ -1,0 +1,30 @@
+.GridItem {
+  transition-duration: 0.5s;
+  width: 100%;
+  height: 100%;
+  /* Default Border */
+  border: 1px solid black;
+  border-radius: 7px;
+  cursor: pointer;
+  /* display: block; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.GridItem:hover {
+  transition-duration: 0.5s;
+  background-color: #eee;
+}
+
+.Img {
+  /* width: 90%; */
+  height: 100px;
+  display: block;
+  margin: 0 auto;
+}
+
+.Msg {
+  text-align: center;
+}

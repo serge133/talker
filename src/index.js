@@ -8,10 +8,10 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 // Reducers
-import reducer from "./store/reducers/reducer";
+import mainReducer from "./store/reducers/main";
 
 const rootReducer = combineReducers({
-  root: reducer
+  main: mainReducer
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
