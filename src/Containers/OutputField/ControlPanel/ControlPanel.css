@@ -1,0 +1,27 @@
+.ControlPanel {
+  position: absolute;
+  top: 0;
+  right: 150px;
+  color: #474747;
+  cursor: pointer;
+  /* width: 500px; */
+  height: 80px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px 0;
+}
+
+.Control {
+  transition-duration: 0.3s;
+  opacity: 0.5;
+  height: 100%;
+  font-size: 50px;
+  display: inline-block;
+  margin-left: 7px;
+}
+
+.Control:hover {
+  transition-duration: 0.3s;
+
+  opacity: 1;
+}

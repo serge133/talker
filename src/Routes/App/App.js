@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import classes from "./App.css";
-import * as actionTypes from "../../store/actionTypes";
 import { connect } from "react-redux";
+import * as actionTypes from "../../store/actionTypes";
 import ActionGrid from "../../Containers/ActionGrid/ActionGrid";
-import Dropdown from "../../Components/Dropdown/Dropdown";
 import GridActions from "../../Components/GridActions/GridActions";
 import OutputField from "../../Containers/OutputField/OutputField";
-import { textToSpeech } from "../../Functions/TextToSpeach";
+import { textToSpeech } from "../../Functions/TextToSpeech";
+import StyledLink from "../../Styles/Link";
 
 const App = props => {
   const [page, setPage] = useState(0);
@@ -23,36 +23,37 @@ const App = props => {
 
   const previousPage = () => {
     let newPageNum = 0;
-    if (page - 1 < 0) return;
+    if (page - 1 < 0) return props.changeGrid("folders");
     newPageNum = page - 1;
     setPage(newPageNum);
   };
 
-  const changeGridSizeAndResetPage = (rows, columns) => {
-    setPage(0);
-    props.changeGridSize(rows, columns);
-  };
-
   const handleClick = gridItem => {
-    textToSpeech(gridItem.msg);
-    setOutputField(outputField.concat(gridItem));
+    if (gridItem.folder) {
+      props.changeGrid(gridItem.type);
+    } else {
+      textToSpeech(gridItem.msg, props.voice);
+      setOutputField(outputField.concat(gridItem));
+    }
   };
 
-  const clearOutputField = () => setOutputField([]);
+  const clearOutputField = () => {
+    const copyOutputField = [...outputField];
+    copyOutputField.splice(copyOutputField.length - 1, 1);
+    setOutputField(copyOutputField);
+  };
 
   return (
     <div className={classes.App}>
-      <Dropdown
-        color="#474747"
-        name={`${props.rows} rows, ${props.columns} columns`}
-        style={{ position: "fixed", right: 0 }}
+      {/* <Link to="/settings" className={classes.Settings}>
+        <img src={settingsSVG} alt="settings" />
+      </Link> */}
+      <StyledLink
+        style={{ position: "fixed", top: 0, right: 0, zIndex: 999, margin: 20 }}
+        to="/settings"
       >
-        <li onClick={() => changeGridSizeAndResetPage(2, 2)}>2 x 2</li>
-        <li onClick={() => changeGridSizeAndResetPage(2, 3)}>2 x 3</li>
-        <li onClick={() => changeGridSizeAndResetPage(3, 3)}>3 x 3</li>
-        <li onClick={() => changeGridSizeAndResetPage(5, 5)}>5 x 5</li>
-        <li onClick={() => changeGridSizeAndResetPage(5, 8)}>5 x 8</li>
-      </Dropdown>
+        Settings
+      </StyledLink>
       <OutputField field={outputField} clearField={clearOutputField} />
       <ActionGrid
         rows={props.rows}
@@ -61,7 +62,11 @@ const App = props => {
         page={page}
         handleClick={handleClick}
       />
-      <GridActions nextPage={nextPage} previousPage={previousPage} />
+      <GridActions
+        page={page}
+        nextPage={nextPage}
+        previousPage={previousPage}
+      />
     </div>
   );
 };
@@ -70,18 +75,15 @@ const mapStateToProps = state => {
   return {
     gridItems: state.main.grid.gridItems,
     rows: state.main.grid.rows,
-    columns: state.main.grid.columns
+    columns: state.main.grid.columns,
+    voice: state.main.voice
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeGridSize: (rows, columns) =>
-      dispatch({
-        type: actionTypes.CHANGE_GRID_SIZE,
-        rows: rows,
-        columns: columns
-      })
+    changeGrid: layout =>
+      dispatch({ type: actionTypes.CHANGE_GRID, layout: layout })
   };
 };
 

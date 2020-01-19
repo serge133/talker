@@ -9,7 +9,6 @@ class Dropdown extends Component {
     this.state = {
       displayMenu: false
     };
-
     this.showDropdownMenu = this.showDropdownMenu.bind(this);
     this.hideDropdownMenu = this.hideDropdownMenu.bind(this);
   }
@@ -33,13 +32,13 @@ class Dropdown extends Component {
         className={classes.dropdown}
         style={{
           background: this.props.color,
-          width: "200px",
+          width: 300,
           ...this.props.style
         }}
+        onClick={this.showDropdownMenu}
       >
         <div
           className={classes.button}
-          onClick={this.showDropdownMenu}
           style={{ backgroundColor: this.props.color }}
         >
           {this.props.name}

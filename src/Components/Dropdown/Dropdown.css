@@ -10,7 +10,7 @@
   padding: 0;
   top: 45px;
   right: 0px;
-  width: 200px;
+  width: 300px;
   background-color: white;
   font-weight: bold;
   position: absolute;
@@ -32,9 +32,10 @@
   color: white;
 }
 .dropdown .button {
-  width: 178px;
+  /* width: calc(100% - 20px); */
+
   height: 45px;
-  padding: 12px;
+  padding: 12px 30px;
   border-radius: 5px;
   font-weight: bold;
   color: white;

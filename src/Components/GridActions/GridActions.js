@@ -6,7 +6,7 @@ const GridActions = props => {
   return (
     <div className={classes.GridActions}>
       <button onClick={props.previousPage} className={classes.PreviousPage}>
-        Previous Page
+        {props.page === 0 ? "Go Back" : "Previous Page"}
       </button>
       <button onClick={props.nextPage} className={classes.NextPage}>
         Next Page
@@ -16,6 +16,7 @@ const GridActions = props => {
 };
 
 GridActions.propTypes = {
+  page: PropTypes.number.isRequired,
   nextPage: PropTypes.func.isRequired,
   previousPage: PropTypes.func.isRequired
 };

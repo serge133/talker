@@ -1,14 +1,14 @@
 import React from "react";
 import classes from "./OutputField.css";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { textToSpeech } from "../../Functions/TextToSpeach";
-import announceSVG from "../../assets/announce.svg";
-import closeSVG from "../../assets/close.svg";
+import { textToSpeech } from "../../Functions/TextToSpeech";
+import ControlPanel from "./ControlPanel/ControlPanel";
 
 const OutputField = props => {
   const voiceOutput = () => {
     const sentence = props.field.map(g => g.msg).join(" ");
-    return textToSpeech(sentence);
+    return textToSpeech(sentence, props.voice);
   };
 
   return (
@@ -17,7 +17,7 @@ const OutputField = props => {
         <div
           key={i}
           className={classes.OutputElement}
-          onClick={() => textToSpeech(g.msg)}
+          onClick={() => textToSpeech(g.msg, props.voice)}
         >
           <img
             src={require(`../../assets/actionGrid/${g.type}/${g.img}`)}
@@ -26,9 +26,8 @@ const OutputField = props => {
           <h4>{g.msg}</h4>
         </div>
       ))}
-      {/* <h3>{sentence}</h3> */}
-      <div className={classes.Controls}>
-        <img
+
+      {/* <img
           src={announceSVG}
           alt="Announce Voice"
           className={classes.Control}
@@ -39,8 +38,8 @@ const OutputField = props => {
           alt="Erase Output Field"
           className={classes.Control}
           onClick={props.clearField}
-        />
-      </div>
+        /> */}
+      <ControlPanel voiceOutput={voiceOutput} clearField={props.clearField} />
     </div>
   );
 };
@@ -50,4 +49,10 @@ OutputField.propTypes = {
   clearField: PropTypes.func.isRequired
 };
 
-export default OutputField;
+const mapStateToProps = state => {
+  return {
+    voice: state.main.voice
+  };
+};
+
+export default connect(mapStateToProps)(OutputField);

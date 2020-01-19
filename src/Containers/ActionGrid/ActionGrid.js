@@ -9,7 +9,6 @@ const ActionGrid = props => {
   };
 
   const maxGridItems = props.rows * props.columns;
-
   const pagination = () => {
     const pages = Math.ceil(props.gridItems.length / maxGridItems);
     const pagedGridItems = [];
@@ -20,8 +19,6 @@ const ActionGrid = props => {
     }
     return pagedGridItems;
   };
-  // * GridItem successfully reads images from asset folder
-  // Todo: Make the array map for the grid items by using an object
 
   return (
     <div className={classes.Grid} style={gridStyle}>
@@ -29,6 +26,7 @@ const ActionGrid = props => {
         <GridItem
           key={i}
           type={gridItem.type}
+          isFolder={gridItem.folder}
           img={gridItem.img}
           msg={gridItem.msg}
           handleClick={props.handleClick}
