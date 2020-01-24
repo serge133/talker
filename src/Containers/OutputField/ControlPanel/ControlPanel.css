@@ -1,7 +1,8 @@
 .ControlPanel {
-  position: absolute;
+  grid-area: 1 / 2 / 1 / 2;
+  /* position: absolute;
   top: 0;
-  right: 150px;
+  right: 150px; */
   color: #474747;
   cursor: pointer;
   /* width: 500px; */

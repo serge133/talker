@@ -1,0 +1,122 @@
+.MenuIcon {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.MenuIcon img {
+  width: 30px;
+  margin: auto;
+  cursor: pointer;
+}
+
+/* When the menu is open */
+.Menu {
+  /* transition-duration: 1s; */
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  border-radius: 7px;
+  box-shadow: 5px 7px 3px 3px #ccc;
+  z-index: 9999;
+  animation-name: openMenu;
+  animation-duration: 0.5s;
+  animation-direction: normal;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  /* animation: openMenu 1s normal 0s 1s forwards ease-in; */
+}
+
+.Menu ul {
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-delay: 0.5s;
+  animation-duration: 1s;
+  animation-direction: normal;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  padding: 50px 10px 10px 0;
+}
+
+.Menu ul a {
+  transition-duration: 0.5s;
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px 0 10px 5px;
+  border-radius: 0 30px 30px 0;
+  text-decoration: none;
+  position: relative;
+  font-size: 2rem;
+  color: #474747;
+  opacity: 0.7;
+}
+
+.Menu ul a:hover {
+  transition-duration: 0.5s;
+  opacity: 1;
+  background-color: #ddd;
+}
+
+.Menu ul a img {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  height: calc(100% - 10px);
+  opacity: 0.4;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes openMenu {
+  from {
+    width: 0px;
+  }
+  to {
+    width: 300px;
+  }
+}
+
+.CloseMenu::before {
+  content: "x";
+  cursor: pointer;
+  color: #474747;
+  font-size: 2rem;
+  font-weight: 100;
+}
+
+.CloseMenu {
+  transition-duration: 0.5s;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  z-index: 9999999;
+  opacity: 0.3;
+}
+
+.CloseMenu:hover {
+  transition-duration: 0.5s;
+  background-color: #ddd;
+  opacity: 0.5;
+}

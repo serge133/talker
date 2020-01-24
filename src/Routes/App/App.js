@@ -6,7 +6,8 @@ import ActionGrid from "../../Containers/ActionGrid/ActionGrid";
 import GridActions from "../../Components/GridActions/GridActions";
 import OutputField from "../../Containers/OutputField/OutputField";
 import { textToSpeech } from "../../Functions/TextToSpeech";
-import StyledLink from "../../Styles/Link";
+import Menu from "../../Components/Menu/Menu";
+//! import { sendTextMessage } from "../../Functions/notifaction";
 
 const App = props => {
   const [page, setPage] = useState(0);
@@ -34,6 +35,8 @@ const App = props => {
     } else {
       textToSpeech(gridItem.msg, props.voice);
       setOutputField(outputField.concat(gridItem));
+      // ! DEVELOPMENT
+      // sendTextMessage("+14086699401", `Someone clicked ${gridItem.msg}`);
     }
   };
 
@@ -45,15 +48,7 @@ const App = props => {
 
   return (
     <div className={classes.App}>
-      {/* <Link to="/settings" className={classes.Settings}>
-        <img src={settingsSVG} alt="settings" />
-      </Link> */}
-      <StyledLink
-        style={{ position: "fixed", top: 0, right: 0, zIndex: 999, margin: 20 }}
-        to="/settings"
-      >
-        Settings
-      </StyledLink>
+      <Menu />
       <OutputField field={outputField} clearField={clearOutputField} />
       <ActionGrid
         rows={props.rows}

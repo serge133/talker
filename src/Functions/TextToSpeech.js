@@ -3,7 +3,6 @@ export const textToSpeech = (text, voice) => {
   // new SpeechSynthesisUtterance object
   let utter = new SpeechSynthesisUtterance();
   utter.voice = !voice ? defaultVoice : voice;
-  // utter.voice = available_voices[4];
   utter.rate = 1;
   utter.pitch = 1;
   utter.text = text;

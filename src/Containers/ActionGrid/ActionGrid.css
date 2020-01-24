@@ -1,9 +1,9 @@
 .Grid {
   position: fixed;
-  top: 75px;
+  top: 100px;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 125px);
   display: grid;
   /* Optional Space between in the grid */
   grid-gap: 10px;

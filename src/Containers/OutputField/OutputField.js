@@ -12,33 +12,22 @@ const OutputField = props => {
   };
 
   return (
-    <div className={classes.OutputField}>
-      {props.field.map((g, i) => (
-        <div
-          key={i}
-          className={classes.OutputElement}
-          onClick={() => textToSpeech(g.msg, props.voice)}
-        >
-          <img
-            src={require(`../../assets/actionGrid/${g.type}/${g.img}`)}
-            alt={g.msg}
-          />
-          <h4>{g.msg}</h4>
-        </div>
-      ))}
-
-      {/* <img
-          src={announceSVG}
-          alt="Announce Voice"
-          className={classes.Control}
-          onClick={voiceOutput}
-        />
-        <img
-          src={closeSVG}
-          alt="Erase Output Field"
-          className={classes.Control}
-          onClick={props.clearField}
-        /> */}
+    <div className={classes.TopBar}>
+      <div className={classes.OutputField}>
+        {props.field.map((g, i) => (
+          <div
+            key={i}
+            className={classes.OutputElement}
+            onClick={() => textToSpeech(g.msg, props.voice)}
+          >
+            <img
+              src={require(`../../assets/actionGrid/${g.type}/${g.img}`)}
+              alt={g.msg}
+            />
+            <h4>{g.msg}</h4>
+          </div>
+        ))}
+      </div>
       <ControlPanel voiceOutput={voiceOutput} clearField={props.clearField} />
     </div>
   );
