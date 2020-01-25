@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./OutputField.css";
 import { connect } from "react-redux";
+import * as actionTypes from "../../store/actionTypes";
 import PropTypes from "prop-types";
 import { textToSpeech } from "../../Functions/TextToSpeech";
 import ControlPanel from "./ControlPanel/ControlPanel";
@@ -14,7 +15,7 @@ const OutputField = props => {
   return (
     <div className={classes.TopBar}>
       <div className={classes.OutputField}>
-        {props.field.map((g, i) => (
+        {props.outputField.map((g, i) => (
           <div
             key={i}
             className={classes.OutputElement}
@@ -28,20 +29,34 @@ const OutputField = props => {
           </div>
         ))}
       </div>
-      <ControlPanel voiceOutput={voiceOutput} clearField={props.clearField} />
+      <ControlPanel
+        voiceOutput={voiceOutput}
+        deleteOutputElement={props.deleteOutputElement}
+        clearOutputField={props.clearOutputField}
+      />
     </div>
   );
 };
 
 OutputField.propTypes = {
-  field: PropTypes.array.isRequired,
-  clearField: PropTypes.func.isRequired
+  field: PropTypes.array.isRequired
+  // deleteOutputElement: PropTypes.func.isRequired,
+  // clearOutputField: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    voice: state.main.voice
+    voice: state.main.voice,
+    outputField: state.main.outputField
   };
 };
 
-export default connect(mapStateToProps)(OutputField);
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteOutputElement: () =>
+      dispatch({ type: actionTypes.DELETE_OUTPUT_ELEMENT }),
+    clearOutputField: () => dispatch({ type: actionTypes.CLEAR_OUTPUT_FIELD })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OutputField);

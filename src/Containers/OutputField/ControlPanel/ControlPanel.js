@@ -17,7 +17,8 @@ const ControlPanel = props => {
         src={closeSVG}
         alt="Erase Output Field"
         className={classes.Control}
-        onClick={props.clearField}
+        onClick={props.deleteOutputElement}
+        onDoubleClick={props.clearOutputField}
       />
     </div>
   );
@@ -25,7 +26,7 @@ const ControlPanel = props => {
 
 ControlPanel.propTypes = {
   voiceOutput: PropTypes.func.isRequired,
-  clearField: PropTypes.func.isRequired
+  deleteOutputElement: PropTypes.func.isRequired
 };
 
 export default ControlPanel;

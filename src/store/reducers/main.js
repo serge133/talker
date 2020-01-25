@@ -10,7 +10,8 @@ const initialState = {
     rows: 2,
     columns: 3,
     gridItems: folders
-  }
+  },
+  outputField: []
 };
 
 const changeGridSize = (state, action) => {
@@ -42,6 +43,23 @@ const setVoice = (state, action) => {
   });
 };
 
+const addElementToOutputField = (state, action) => {
+  const { element } = action;
+  return updateObject(state, {
+    outputField: state.outputField.concat([element])
+  });
+};
+
+const deleteOutputElement = (state, action) => {
+  const copyOutputField = [...state.outputField];
+  copyOutputField.splice(copyOutputField.length - 1, 1);
+  return updateObject(state, { outputField: copyOutputField });
+};
+
+const clearOutputField = (state, action) => {
+  return updateObject(state, { outputField: [] });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_GRID_SIZE:
@@ -50,6 +68,13 @@ const reducer = (state = initialState, action) => {
       return changeGrid(state, action);
     case actionTypes.SET_VOICE:
       return setVoice(state, action);
+    case actionTypes.ADD_ELEMENT_TO_OUTPUT_FIELD:
+      return addElementToOutputField(state, action);
+    case actionTypes.CLEAR_OUTPUT_FIELD:
+      return clearOutputField(state, action);
+    case actionTypes.DELETE_OUTPUT_ELEMENT:
+      return deleteOutputElement(state, action);
+
     default:
       return state;
   }

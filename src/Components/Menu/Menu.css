@@ -30,6 +30,7 @@
   animation-direction: normal;
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
+  text-align: left;
   /* animation: openMenu 1s normal 0s 1s forwards ease-in; */
 }
 

@@ -11,7 +11,9 @@ import Menu from "../../Components/Menu/Menu";
 
 const App = props => {
   const [page, setPage] = useState(0);
+  // * remove this
   const [outputField, setOutputField] = useState([]);
+  // * ------
   const maxGridItems = props.rows * props.columns;
 
   const nextPage = () => {
@@ -34,13 +36,13 @@ const App = props => {
       props.changeGrid(gridItem.type);
     } else {
       textToSpeech(gridItem.msg, props.voice);
-      setOutputField(outputField.concat(gridItem));
-      // ! DEVELOPMENT
-      // sendTextMessage("+14086699401", `Someone clicked ${gridItem.msg}`);
+      props.addElementToOutputField(gridItem);
     }
   };
 
-  const clearOutputField = () => {
+  const clearOutputField = () => setOutputField([]);
+
+  const deleteOutputElement = () => {
     const copyOutputField = [...outputField];
     copyOutputField.splice(copyOutputField.length - 1, 1);
     setOutputField(copyOutputField);
@@ -48,8 +50,12 @@ const App = props => {
 
   return (
     <div className={classes.App}>
-      <Menu />
-      <OutputField field={outputField} clearField={clearOutputField} />
+      <Menu currentPath="/" />
+      <OutputField
+        field={outputField}
+        deleteOutputElement={deleteOutputElement}
+        clearOutputField={clearOutputField}
+      />
       <ActionGrid
         rows={props.rows}
         columns={props.columns}
@@ -71,14 +77,20 @@ const mapStateToProps = state => {
     gridItems: state.main.grid.gridItems,
     rows: state.main.grid.rows,
     columns: state.main.grid.columns,
-    voice: state.main.voice
+    voice: state.main.voice,
+    outputField: state.main.outputField
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     changeGrid: layout =>
-      dispatch({ type: actionTypes.CHANGE_GRID, layout: layout })
+      dispatch({ type: actionTypes.CHANGE_GRID, layout: layout }),
+    addElementToOutputField: element =>
+      dispatch({
+        type: actionTypes.ADD_ELEMENT_TO_OUTPUT_FIELD,
+        element: element
+      })
   };
 };
 

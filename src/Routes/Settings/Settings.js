@@ -4,6 +4,7 @@ import * as actionTypes from "../../store/actionTypes";
 import { connect } from "react-redux";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import StyledLink from "../../Styles/Link";
+import Menu from "../../Components/Menu/Menu";
 
 const Settings = props => {
   const [availableVoices, setAvailableVoices] = useState([
@@ -35,6 +36,7 @@ const Settings = props => {
 
   return (
     <div className={classes.Settings}>
+      <Menu currentPath="/settings" />
       <h1>Grid Size</h1>
       <Dropdown
         color="#474747"
