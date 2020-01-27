@@ -1,0 +1,39 @@
+.TextualField {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: calc(100vw - 50px);
+  height: 100px;
+  line-height: 100px;
+  font-size: 2rem;
+  display: grid;
+  grid-template: 100% / 10fr 1fr;
+}
+
+.Text {
+  grid-area: 1 / 1 / 1 / 1;
+  white-space: nowrap;
+  overflow: auto;
+}
+
+.Controls {
+  grid-area: 1 / 2 / 1 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.Controls img {
+  transition-duration: 0.3s;
+  opacity: 0.5;
+  height: 40px;
+  font-size: 50px;
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.Controls img:hover {
+  transition-duration: 0.3s;
+  opacity: 1;
+}

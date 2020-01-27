@@ -9,9 +9,11 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 // Reducers
 import mainReducer from "./store/reducers/main";
+import keyboardReducer from "./store/reducers/keyboard";
 
 const rootReducer = combineReducers({
-  main: mainReducer
+  main: mainReducer,
+  keyboard: keyboardReducer
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

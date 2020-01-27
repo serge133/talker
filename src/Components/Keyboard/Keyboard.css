@@ -1,9 +1,8 @@
 .Keyboard {
-  width: 1000px;
+  width: 100vw;
   height: 400px;
   border-radius: 4px;
   border: 1px solid black;
   display: grid;
-  grid-template: repeat(4, 1fr) / repeat(9, 1fr);
-  grid-gap: 10px;
+  grid-template: repeat(4, 1fr) / repeat(10, 1fr);
 }
