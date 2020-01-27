@@ -13,6 +13,7 @@
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
+  cursor: pointer;
 }
 
 .OutputElement {
@@ -20,7 +21,6 @@
   height: 75px;
   text-align: center;
   margin-right: 10px;
-  cursor: pointer;
   border-radius: 7px;
 }
 

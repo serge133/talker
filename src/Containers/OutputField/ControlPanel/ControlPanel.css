@@ -1,7 +1,6 @@
 .ControlPanel {
   grid-area: 1 / 2 / 1 / 2;
   color: #474747;
-  cursor: pointer;
   /* width: 500px; */
   display: flex;
   justify-content: flex-end;
@@ -16,6 +15,7 @@
   font-size: 50px;
   display: inline-block;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .Control:hover {

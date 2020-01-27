@@ -74,7 +74,6 @@ const reducer = (state = initialState, action) => {
       return clearOutputField(state, action);
     case actionTypes.DELETE_OUTPUT_ELEMENT:
       return deleteOutputElement(state, action);
-
     default:
       return state;
   }

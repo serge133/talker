@@ -2,25 +2,20 @@ import React from "react";
 import classes from "./OutputField.css";
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actionTypes";
-import PropTypes from "prop-types";
 import { textToSpeech } from "../../Functions/TextToSpeech";
 import ControlPanel from "./ControlPanel/ControlPanel";
 
 const OutputField = props => {
   const voiceOutput = () => {
-    const sentence = props.field.map(g => g.msg).join(" ");
+    const sentence = props.outputField.map(g => g.msg).join(" ");
     return textToSpeech(sentence, props.voice);
   };
 
   return (
     <div className={classes.TopBar}>
-      <div className={classes.OutputField}>
+      <div className={classes.OutputField} onClick={voiceOutput}>
         {props.outputField.map((g, i) => (
-          <div
-            key={i}
-            className={classes.OutputElement}
-            onClick={() => textToSpeech(g.msg, props.voice)}
-          >
+          <div key={i} className={classes.OutputElement}>
             <img
               src={require(`../../assets/actionGrid/${g.type}/${g.img}`)}
               alt={g.msg}
@@ -30,18 +25,11 @@ const OutputField = props => {
         ))}
       </div>
       <ControlPanel
-        voiceOutput={voiceOutput}
         deleteOutputElement={props.deleteOutputElement}
         clearOutputField={props.clearOutputField}
       />
     </div>
   );
-};
-
-OutputField.propTypes = {
-  field: PropTypes.array.isRequired
-  // deleteOutputElement: PropTypes.func.isRequired,
-  // clearOutputField: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {

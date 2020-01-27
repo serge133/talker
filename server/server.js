@@ -34,12 +34,4 @@ socketServer.on("connection", socket => {
   });
 });
 
-// httpServer.listen(port, ip, () =>
-//   console.log(`Listening to port: ${port}, and ip: ${ip}`)
-// );
-
-// app.listen(3001, () =>
-//   console.log("Express server is running on localhost:3001")
-// );
-
 app.listen(port, ip, () => console.log(`port: ${port}; ip: ${ip}`));

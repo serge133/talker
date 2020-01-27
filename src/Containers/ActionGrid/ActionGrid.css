@@ -3,10 +3,9 @@
   top: 100px;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 125px);
+  min-height: calc(100vh - 150px);
   display: grid;
   /* Optional Space between in the grid */
   grid-gap: 10px;
   padding: 10px;
-  overflow: auto;
 }
