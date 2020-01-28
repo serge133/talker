@@ -30,6 +30,9 @@ const ActionGrid = props => {
           img={gridItem.img}
           msg={gridItem.msg}
           handleClick={props.handleClick}
+          typeColor={
+            props.typeColors.find(tc => tc.type === gridItem.type).color
+          }
         />
       ))}
     </div>
@@ -41,7 +44,8 @@ ActionGrid.propTypes = {
   columns: PropTypes.number.isRequired,
   gridItems: PropTypes.array.isRequired,
   page: PropTypes.number.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  typeColors: PropTypes.object.isRequired
 };
 
 export default ActionGrid;

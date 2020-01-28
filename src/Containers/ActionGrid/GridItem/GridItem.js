@@ -4,18 +4,10 @@ import PropTypes from "prop-types";
 import folderSVG from "../../../assets/folder.svg";
 
 const GridItem = props => {
-  const typeColor = {
-    actions: "pink",
-    living: "purple",
-    places: "green",
-    things: "blue",
-    food: "tomato"
-  };
-
   return (
     <div
       className={classes.GridItem}
-      style={{ border: `3px solid ${typeColor[props.type]}` }}
+      style={{ border: `3px solid ${props.typeColor}` }}
       onClick={() =>
         props.handleClick({
           type: props.type,
@@ -43,7 +35,8 @@ GridItem.propTypes = {
   isFolder: PropTypes.bool.isRequired,
   img: PropTypes.string.isRequired,
   msg: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  typeColor: PropTypes.string.isRequired
 };
 
 export default GridItem;

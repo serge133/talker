@@ -3,13 +3,22 @@ import classes from "./Settings.css";
 import * as actionTypes from "../../store/actionTypes";
 import { connect } from "react-redux";
 import Dropdown from "../../Components/Dropdown/Dropdown";
-import StyledLink from "../../Styles/Link";
 import Menu from "../../Components/Menu/Menu";
+import TypeColors from "./TypeColors/TypeColors";
+import { Link } from "react-router-dom";
+import { BlockPicker } from "react-color";
 
 const Settings = props => {
   const [availableVoices, setAvailableVoices] = useState([
     { name: "Default Voice" }
   ]);
+  const [colorPicker, setColorPicker] = useState({
+    top: 0,
+    left: 0,
+    display: "none",
+    color: "#22194d",
+    actionType: ""
+  });
 
   useEffect(() => {
     function setSpeech() {
@@ -31,7 +40,23 @@ const Settings = props => {
   const dropDownStyle = {
     display: "block",
     margin: "10px auto 10px auto"
-    // marginTop: 30
+  };
+
+  const openColorPicker = (e, actionType, color) => {
+    console.log(color);
+    setColorPicker({
+      top: e.clientY,
+      left: e.clientX - 100,
+      display: "block",
+      color: color,
+      actionType: actionType
+    });
+  };
+  const changeColor = ({ hex }) =>
+    setColorPicker({ ...colorPicker, color: hex });
+  const setColor = () => {
+    props.changeTypeColor(colorPicker.actionType, colorPicker.color);
+    setColorPicker({ ...colorPicker, display: "none" });
   };
 
   return (
@@ -61,7 +86,22 @@ const Settings = props => {
           </li>
         ))}
       </Dropdown>
-      <StyledLink to="/">Done</StyledLink>
+      <TypeColors
+        typeColors={props.typeColors}
+        changeTypeColor={props.changeTypeColor}
+        openColorPicker={openColorPicker}
+      />
+      <div
+        className={classes.ColorPicker}
+        style={{ position: "fixed", ...colorPicker }}
+      >
+        <BlockPicker onChangeComplete={changeColor} color={colorPicker.color} />
+        <button onClick={setColor}>Ok</button>
+      </div>
+      <Link to="/" className={classes.Done}>
+        Done
+      </Link>
+      {/* <StyledLink to="/">Done</StyledLink> */}
     </div>
   );
 };
@@ -70,7 +110,8 @@ const mapStateToProps = state => {
   return {
     rows: state.main.grid.rows,
     columns: state.main.grid.columns,
-    voice: state.main.voice
+    voice: state.main.voice,
+    typeColors: state.main.grid.typeColors
   };
 };
 
@@ -82,7 +123,13 @@ const mapDispatchToProps = dispatch => {
         rows: rows,
         columns: columns
       }),
-    setVoice: voice => dispatch({ type: actionTypes.SET_VOICE, voice: voice })
+    setVoice: voice => dispatch({ type: actionTypes.SET_VOICE, voice: voice }),
+    changeTypeColor: (actionType, color) =>
+      dispatch({
+        type: actionTypes.CHANGE_TYPE_COLOR,
+        actionType: actionType,
+        color: color
+      })
   };
 };
 

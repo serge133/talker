@@ -62,6 +62,7 @@ const App = props => {
         gridItems={props.gridItems}
         page={page}
         handleClick={handleClick}
+        typeColors={props.typeColors}
       />
       <GridActions
         page={page}
@@ -78,7 +79,8 @@ const mapStateToProps = state => {
     rows: state.main.grid.rows,
     columns: state.main.grid.columns,
     voice: state.main.voice,
-    outputField: state.main.outputField
+    outputField: state.main.outputField,
+    typeColors: state.main.grid.typeColors
   };
 };
 

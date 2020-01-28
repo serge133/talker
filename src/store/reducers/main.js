@@ -9,7 +9,21 @@ const initialState = {
   grid: {
     rows: 2,
     columns: 3,
-    gridItems: folders
+    gridItems: folders,
+    // typeColors: {
+    //   actions: "pink",
+    //   living: "purple",
+    //   places: "green",
+    //   things: "blue",
+    //   food: "tomato"
+    // }
+    typeColors: [
+      { type: "actions", color: "pink" },
+      { type: "living", color: "purple" },
+      { type: "places", color: "green" },
+      { type: "things", color: "blue" },
+      { type: "food", color: "tomato" }
+    ]
   },
   outputField: []
 };
@@ -60,6 +74,20 @@ const clearOutputField = (state, action) => {
   return updateObject(state, { outputField: [] });
 };
 
+const changeTypeColor = (state, action) => {
+  const { actionType, color } = action;
+  const newTypeColors = [...state.grid.typeColors];
+  const typeColorIndex = newTypeColors.findIndex(t => t.type === actionType);
+  if (typeColorIndex < 0) return new Error("Index in type color is wrong");
+  newTypeColors[typeColorIndex].color = color;
+  return updateObject(state, {
+    grid: {
+      ...state.grid,
+      typeColors: newTypeColors
+    }
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.CHANGE_GRID_SIZE:
@@ -74,6 +102,8 @@ const reducer = (state = initialState, action) => {
       return clearOutputField(state, action);
     case actionTypes.DELETE_OUTPUT_ELEMENT:
       return deleteOutputElement(state, action);
+    case actionTypes.CHANGE_TYPE_COLOR:
+      return changeTypeColor(state, action);
     default:
       return state;
   }
