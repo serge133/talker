@@ -1,10 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import classes from "./TypeColors.css";
 import PropTypes from "prop-types";
 
 const TypeColors = props => {
-  // const typeColorArray = Object.entries(props.typeColors);
-
   /**
    * t[0] is type
    * t[1] is the color of the type

@@ -6,15 +6,13 @@ import Dropdown from "../../Components/Dropdown/Dropdown";
 import Menu from "../../Components/Menu/Menu";
 import TypeColors from "./TypeColors/TypeColors";
 import { Link } from "react-router-dom";
-import { BlockPicker } from "react-color";
+import { ChromePicker } from "react-color";
 
 const Settings = props => {
   const [availableVoices, setAvailableVoices] = useState([
     { name: "Default Voice" }
   ]);
   const [colorPicker, setColorPicker] = useState({
-    top: 0,
-    left: 0,
     display: "none",
     color: "#22194d",
     actionType: ""
@@ -52,11 +50,10 @@ const Settings = props => {
       actionType: actionType
     });
   };
-  const changeColor = ({ hex }) =>
+
+  const setColor = ({ hex }) => {
     setColorPicker({ ...colorPicker, color: hex });
-  const setColor = () => {
     props.changeTypeColor(colorPicker.actionType, colorPicker.color);
-    setColorPicker({ ...colorPicker, display: "none" });
   };
 
   return (
@@ -86,22 +83,20 @@ const Settings = props => {
           </li>
         ))}
       </Dropdown>
-      <TypeColors
-        typeColors={props.typeColors}
-        changeTypeColor={props.changeTypeColor}
-        openColorPicker={openColorPicker}
-      />
-      <div
-        className={classes.ColorPicker}
-        style={{ position: "fixed", ...colorPicker }}
-      >
-        <BlockPicker onChangeComplete={changeColor} color={colorPicker.color} />
-        <button onClick={setColor}>Ok</button>
+      <div className={classes.Colors}>
+        <TypeColors
+          typeColors={props.typeColors}
+          changeTypeColor={props.changeTypeColor}
+          openColorPicker={openColorPicker}
+        />
+        <div className={classes.ColorPicker} style={colorPicker}>
+          <h1 className={classes.ActionType}>{colorPicker.actionType}</h1>
+          <ChromePicker onChangeComplete={setColor} color={colorPicker.color} />
+        </div>
       </div>
       <Link to="/" className={classes.Done}>
         Done
       </Link>
-      {/* <StyledLink to="/">Done</StyledLink> */}
     </div>
   );
 };

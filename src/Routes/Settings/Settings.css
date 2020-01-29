@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+.Colors {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.ColorPicker {
+}
+
+.ColorPicker .ActionType {
+  display: inline-block;
+}
+
 .Done {
   margin-top: 20px;
   display: block;

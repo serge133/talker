@@ -1,8 +1,7 @@
 .TypeColors {
   display: inline-block;
-  width: 300px;
+  width: 200px;
   box-shadow: 3px 4px 3px 2px #ccc;
-  margin: 0 auto;
   padding: 10px;
   overflow: auto;
   border-radius: 4px;
