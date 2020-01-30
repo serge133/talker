@@ -13,10 +13,16 @@ const TypeColors = props => {
       {props.typeColors.map(t => (
         <div
           className={classes.TypeColor}
-          key={t}
+          key={t.type}
           onClick={e => props.openColorPicker(e, t.type, t.color)}
         >
-          <h2 className={classes.Type}>{t.type} - </h2>
+          <h4
+            className={
+              props.chosenColor === t.type ? classes.ChosenType : classes.Type
+            }
+          >
+            {t.type} -{" "}
+          </h4>
           <div style={{ backgroundColor: t.color }} className={classes.Color} />
         </div>
       ))}
@@ -27,7 +33,8 @@ const TypeColors = props => {
 TypeColors.propTypes = {
   typeColors: PropTypes.array.isRequired,
   changeTypeColor: PropTypes.func.isRequired,
-  openColorPicker: PropTypes.func.isRequired
+  openColorPicker: PropTypes.func.isRequired,
+  chosenColor: PropTypes.string.isRequired
 };
 
 export default TypeColors;

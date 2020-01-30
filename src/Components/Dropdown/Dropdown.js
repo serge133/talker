@@ -31,18 +31,11 @@ class Dropdown extends Component {
       <div
         className={classes.dropdown}
         style={{
-          background: this.props.color,
-          width: 300,
           ...this.props.style
         }}
         onClick={this.showDropdownMenu}
       >
-        <div
-          className={classes.button}
-          style={{ backgroundColor: this.props.color }}
-        >
-          {this.props.name}
-        </div>
+        <div className={classes.button}>{this.props.name}</div>
 
         {this.state.displayMenu ? <ul>{this.props.children}</ul> : null}
       </div>
@@ -52,7 +45,6 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
   name: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
   children: PropTypes.array.isRequired
 };
 

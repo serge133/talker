@@ -1,11 +1,12 @@
 import React, { Fragment, useState } from "react";
 import classes from "./Menu.css";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import menuSVG from "../../assets/menu.svg";
 import homeSVG from "../../assets/home.svg";
 import keyboardSVG from "../../assets/keyboard.svg";
 import settingsSVG from "../../assets/settings.svg";
-import { Link } from "react-router-dom";
+import aboutUsSVG from "../../assets/aboutus.svg";
 
 const Menu = props => {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -34,6 +35,10 @@ const Menu = props => {
           Keyboard
           <img src={keyboardSVG} alt="Keyboard" />
         </Link>
+        <a href="https://www.talkerr.org">
+          About Us
+          <img alt="Settings" src={aboutUsSVG} />
+        </a>
         <Link
           to="/settings"
           style={props.currentPath === "/settings" ? currentPathStyle : null}

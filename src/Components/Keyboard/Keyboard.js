@@ -6,20 +6,20 @@ import { textToSpeech } from "../../Functions/TextToSpeech";
 import { regKeyboard, capsKeyboard } from "./KeyboardLayout";
 
 const Keyboard = props => {
-  const [keyboard, setKeyboard] = useState(regKeyboard);
+  const [keyboard, setKeyboard] = useState(regKeyboard[props.layout]);
   const [pressedShift, setPressedShift] = useState(false);
   const handleClick = letter => {
     // Handles CapsLock
-    if (letter === "caps") return setKeyboard(capsKeyboard);
-    if (letter === "CAPS") return setKeyboard(regKeyboard);
-    if (letter === "SHIFT") return setKeyboard(regKeyboard);
+    if (letter === "caps") return setKeyboard(capsKeyboard[props.layout]);
+    if (letter === "CAPS") return setKeyboard(regKeyboard[props.layout]);
+    if (letter === "SHIFT") return setKeyboard(regKeyboard[props.layout]);
     if (pressedShift) {
       setPressedShift(false);
-      setKeyboard(regKeyboard);
+      setKeyboard(regKeyboard[props.layout]);
     }
     if (letter === "Shift") {
       setPressedShift(true);
-      return setKeyboard(capsKeyboard);
+      return setKeyboard(capsKeyboard[props.layout]);
     }
     textToSpeech(letter, props.voice);
     props.record(letter);
@@ -39,7 +39,8 @@ const Keyboard = props => {
 };
 
 Keyboard.propTypes = {
-  record: PropTypes.func.isRequired
+  record: PropTypes.func.isRequired,
+  layout: PropTypes.string.isRequired
 };
 
 export default Keyboard;

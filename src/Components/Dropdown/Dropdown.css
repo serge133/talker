@@ -3,30 +3,49 @@
   display: inline-block;
   cursor: pointer;
   z-index: 7;
+  border-radius: 30px;
 }
 .dropdown ul {
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-direction: normal;
   list-style-type: none;
   margin: 0;
-  padding: 0;
-  top: 45px;
-  right: 0px;
-  width: 300px;
-  background-color: white;
+  padding: 10px;
+  top: 0;
+  right: -10px;
+  transform: translate(100%, 0);
   font-weight: bold;
   position: absolute;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  overflow: auto;
+  max-height: 200px;
 }
+
+.dropdown li {
+  margin: 5px;
+  display: inline-block;
+  width: calc(50% - 10px);
+  border-radius: 30px;
+  padding: 8px 16px;
+  background-color: white;
+  border: 1px solid #ccc;
+  text-align: center;
+  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
+}
+
 .dropdown li a {
   color: #000;
   text-decoration: none;
 }
-.dropdown li {
-  padding: 8px 16px;
-  border-bottom: 1px solid #e5e5e5;
-}
-.dropdown li:last-child {
+
+/* .dropdown li:last-child {
   border-bottom: none;
-}
+} */
 .dropdown li:hover {
   background-color: #e5e5e5;
   color: white;
@@ -36,9 +55,10 @@
 
   height: 45px;
   padding: 12px 30px;
-  border-radius: 5px;
+  border-radius: 30px;
   font-weight: bold;
-  color: white;
+  color: black;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 .dropdown .button:before {
   content: "";
@@ -49,4 +69,14 @@
   border-color: white transparent transparent transparent;
   right: 6px;
   top: 18px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

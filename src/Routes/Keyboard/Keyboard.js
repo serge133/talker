@@ -46,6 +46,7 @@ const Keyboard = props => {
         style={keyboardStyle}
         record={record}
         voice={props.voice}
+        layout={props.keyboardLayout}
       />
     </div>
   );
@@ -54,6 +55,7 @@ const Keyboard = props => {
 const mapStateToProps = state => {
   return {
     text: state.keyboard.text,
+    keyboardLayout: state.keyboard.layout,
     voice: state.main.voice
   };
 };

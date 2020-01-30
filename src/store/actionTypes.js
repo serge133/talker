@@ -10,3 +10,4 @@ export const CHANGE_TYPE_COLOR = "CHANGE_TYPE_COLOR";
 
 // * Keyboard Action Types
 export const SET_TEXT = "SET_TEXT";
+export const SET_KEYBOARD_LAYOUT = "SET_KEYBOARD_LAYOUT";

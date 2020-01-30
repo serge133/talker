@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import classes from "./Settings.css";
 import * as actionTypes from "../../store/actionTypes";
 import { connect } from "react-redux";
 import Dropdown from "../../Components/Dropdown/Dropdown";
-import Menu from "../../Components/Menu/Menu";
 import TypeColors from "./TypeColors/TypeColors";
 import { Link } from "react-router-dom";
 import { ChromePicker } from "react-color";
@@ -13,9 +12,8 @@ const Settings = props => {
     { name: "Default Voice" }
   ]);
   const [colorPicker, setColorPicker] = useState({
-    display: "none",
-    color: "#22194d",
-    actionType: ""
+    color: "pink",
+    actionType: "actions"
   });
 
   useEffect(() => {
@@ -36,16 +34,11 @@ const Settings = props => {
   }, []);
 
   const dropDownStyle = {
-    display: "block",
     margin: "10px auto 10px auto"
   };
 
   const openColorPicker = (e, actionType, color) => {
-    console.log(color);
     setColorPicker({
-      top: e.clientY,
-      left: e.clientX - 100,
-      display: "block",
       color: color,
       actionType: actionType
     });
@@ -56,12 +49,10 @@ const Settings = props => {
     props.changeTypeColor(colorPicker.actionType, colorPicker.color);
   };
 
-  return (
-    <div className={classes.Settings}>
-      <Menu currentPath="/settings" />
+  const GridSize = (
+    <Fragment>
       <h1>Grid Size</h1>
       <Dropdown
-        color="#474747"
         name={`${props.rows} rows, ${props.columns} columns`}
         style={{ ...dropDownStyle, zIndex: 999 }}
       >
@@ -71,11 +62,15 @@ const Settings = props => {
         <li onClick={() => props.changeGridSize(5, 5)}>5 x 5</li>
         <li onClick={() => props.changeGridSize(5, 8)}>5 x 8</li>
       </Dropdown>
-      <h1>Voices</h1>
+    </Fragment>
+  );
+
+  const Voice = (
+    <Fragment>
+      <h1>Voice</h1>
       <Dropdown
-        color="grey"
         name={!props.voice ? availableVoices[0].name : props.voice.name}
-        style={dropDownStyle}
+        style={{ ...dropDownStyle, zIndex: 99 }}
       >
         {availableVoices.map((voice, index) => (
           <li key={index} onClick={() => props.setVoice(voice)}>
@@ -83,17 +78,43 @@ const Settings = props => {
           </li>
         ))}
       </Dropdown>
+    </Fragment>
+  );
+
+  const Colors = (
+    <Fragment>
+      <h1>Colors</h1>
       <div className={classes.Colors}>
         <TypeColors
           typeColors={props.typeColors}
           changeTypeColor={props.changeTypeColor}
           openColorPicker={openColorPicker}
+          chosenColor={colorPicker.actionType}
         />
         <div className={classes.ColorPicker} style={colorPicker}>
-          <h1 className={classes.ActionType}>{colorPicker.actionType}</h1>
+          {/* <h1 className={classes.ActionType}>{colorPicker.actionType}</h1> */}
           <ChromePicker onChangeComplete={setColor} color={colorPicker.color} />
         </div>
       </div>
+    </Fragment>
+  );
+
+  const KeyboardLayout = (
+    <Fragment>
+      <h1>Keyboard Layout</h1>
+      <Dropdown name={props.keyboardLayout}>
+        <li onClick={() => props.setKeyboardLayout("QWERTY")}>QWERTY</li>
+        <li onClick={() => props.setKeyboardLayout("ABCDEF")}>ABCDEF</li>
+      </Dropdown>
+    </Fragment>
+  );
+
+  return (
+    <div className={classes.Settings}>
+      {GridSize}
+      {Voice}
+      {Colors}
+      {KeyboardLayout}
       <Link to="/" className={classes.Done}>
         Done
       </Link>
@@ -106,7 +127,8 @@ const mapStateToProps = state => {
     rows: state.main.grid.rows,
     columns: state.main.grid.columns,
     voice: state.main.voice,
-    typeColors: state.main.grid.typeColors
+    typeColors: state.main.grid.typeColors,
+    keyboardLayout: state.keyboard.layout
   };
 };
 
@@ -124,7 +146,9 @@ const mapDispatchToProps = dispatch => {
         type: actionTypes.CHANGE_TYPE_COLOR,
         actionType: actionType,
         color: color
-      })
+      }),
+    setKeyboardLayout: layout =>
+      dispatch({ type: actionTypes.SET_KEYBOARD_LAYOUT, layout: layout })
   };
 };
 
