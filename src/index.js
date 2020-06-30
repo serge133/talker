@@ -21,7 +21,6 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-console.log("ATU was Here!")
 ReactDOM.render(
   <Provider store={store}>{routing}</Provider>,
   document.getElementById("root")
