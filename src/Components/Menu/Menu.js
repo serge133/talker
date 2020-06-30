@@ -6,7 +6,7 @@ import menuSVG from "../../assets/menu.svg";
 import homeSVG from "../../assets/home.svg";
 import keyboardSVG from "../../assets/keyboard.svg";
 import settingsSVG from "../../assets/settings.svg";
-import aboutUsSVG from "../../assets/aboutus.svg";
+import bruh from "../../assets/bruh.svg";
 
 const Menu = props => {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -37,7 +37,7 @@ const Menu = props => {
         </Link>
         <a href="https://www.talkerr.org">
           About Us
-          <img alt="Settings" src={aboutUsSVG} />
+          <img alt="Settings" src={bruh} />
         </a>
         <Link
           to="/settings"

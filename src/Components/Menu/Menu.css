@@ -18,7 +18,7 @@
 /* When the menu is open */
 .Menu {
   /* transition-duration: 1s; */
-  background-color: rgb(212, 151, 151);
+  background-color: white;
   position: fixed;
   top: 0;
   left: 0;
@@ -70,7 +70,7 @@
   right: 10px;
   top: 5px;
   height: calc(100% - 10px);
-  opacity: 0.4;
+  opacity: 0.8;
 }
 
 @keyframes fadeIn {
